@@ -6,7 +6,7 @@ namespace ndml
 template <typename T>
 constexpr auto conjugate(quat<T> const& q) noexcept -> quat<T>
 {
-	return {-q.x, -q.y, -q.z, q.w};
+	return {static_cast<T>(-q.x), static_cast<T>(-q.y), static_cast<T>(-q.z), q.w};
 }
 
 template <typename T>
@@ -41,10 +41,10 @@ template <typename T>
 constexpr auto operator*(quat<T> const& lhs, quat<T> const& rhs) noexcept -> quat<T>
 {
 	return {
-		lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y,
-		lhs.w * rhs.y - lhs.x * rhs.z + lhs.y * rhs.w + lhs.z * rhs.x,
-		lhs.w * rhs.z + lhs.x * rhs.y - lhs.y * rhs.x + lhs.z * rhs.w,
-		lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z,
+		static_cast<T>(lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y),
+		static_cast<T>(lhs.w * rhs.y - lhs.x * rhs.z + lhs.y * rhs.w + lhs.z * rhs.x),
+		static_cast<T>(lhs.w * rhs.z + lhs.x * rhs.y - lhs.y * rhs.x + lhs.z * rhs.w),
+		static_cast<T>(lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z),
 	};
 }
 

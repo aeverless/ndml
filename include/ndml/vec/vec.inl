@@ -9,7 +9,7 @@ template <typename... FromTs>
 constexpr vec<N, T>::vec(FromTs... components) noexcept
 	requires (sizeof...(FromTs) <= N && (std::convertible_to<FromTs, value_type> && ...))
 {
-	std::size_t i = 0;
+	auto i = 0uz;
 	(((*this)[i++] = std::move(components)), ...);
 }
 
@@ -26,7 +26,7 @@ template <std::size_t FromN, typename FromT>
 constexpr vec<N, T>::vec(vec<FromN, FromT> const& v) noexcept
 	requires (FromN <= N && std::convertible_to<FromT, value_type>)
 {
-	for (std::size_t i = 0; i < FromN; ++i)
+	for (auto i = 0uz; i < FromN; ++i)
 	{
 		(*this)[i] = static_cast<value_type>(v[i]);
 	}
@@ -37,7 +37,7 @@ template <std::size_t FromN, typename FromT>
 constexpr vec<N, T>::vec(vec<FromN, FromT>&& v) noexcept
 	requires (FromN <= N && std::convertible_to<FromT, value_type>)
 {
-	for (std::size_t i = 0; i < FromN; ++i)
+	for (auto i = 0uz; i < FromN; ++i)
 	{
 		(*this)[i] = static_cast<value_type>(std::move(v[i]));
 	}
@@ -53,6 +53,8 @@ template <std::size_t N, typename T>
 template <typename V>
 constexpr auto vec<N, T>::operator[](this V&& self, std::size_t i) -> subscript_result<V>
 {
+	assert(i < N);
+
 	switch (i)
 	{
 	case 0:
@@ -96,7 +98,7 @@ constexpr auto vec<N, T>::operator[](this V&& self, std::size_t i) -> subscript_
 		}
 
 	default:
-		throw std::out_of_range("index out of range in call to vec subscript operator");
+		throw std::out_of_range(std::format("index {} out of range {} in call to vec subscript operator", i, N));
 	}
 }
 

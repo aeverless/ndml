@@ -38,7 +38,7 @@ constexpr auto scale(vec<N, T> const& v) noexcept -> mat<N + 1, N + 1, T>
 	mat<N + 1, N + 1, T> s;
 	s[N, N] = T{1};
 
-	for (std::size_t i = 0; i < N; ++i)
+	for (auto i = 0uz; i < N; ++i)
 	{
 		s[i, i] = v[i];
 	}
@@ -50,12 +50,7 @@ template <std::size_t N, typename T>
 constexpr auto translation(vec<N, T> const& v) noexcept -> mat<N + 1, N + 1, T>
 {
 	mat<N + 1, N + 1, T> t{T{1}};
-
-	for (std::size_t i = 0; i < N; ++i)
-	{
-		t[N][i] = v[i];
-	}
-
+	t[N] = v;
 	return t;
 }
 

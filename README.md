@@ -4,6 +4,10 @@
 
 Main features include _vectors_, _matrices_, and _quaternions_, operations over them and transformations.
 
+Note that the floating-point versions of these structures are considered "primary" for this library, since a lot of operations that are available for
+floating-point vectors, matrices, and quaternions are not available or unstable for integral versions. Therefore, most tests focus only on the floating-point
+subset of them.
+
 ## Library overview
 
 ### Vectors
@@ -26,11 +30,15 @@ Vectors are supported for up to four dimensions so that each component may be ac
 
 ### Matrices
 
-The library's implementation of a matrix is `ndml::mat<R, C, T>`, given `R` - number of rows, `C` - number of columns, and `T` - element type. Matrices are column-major, so given a matrix `m`, `m[c]` will return a reference to column of `m` at index `c`.
+The library's implementation of a matrix is `ndml::mat<C, R, T>`, given `R` - number of rows, `C` - number of columns, and `T` - element type. Matrices are column-major, so given a matrix `m`, `m[c]` will return a reference to column of `m` at index `c`.
 
 Multi-parameter subscript is also available, so `m[c, r]` will return a reference to the element at the intersection of column `c` and row `r`.
 
 Note that there is no boundary checks for indexing columns, and so it is undefined behavior to access an out of range column.
+
+The coordinate system used for all transformations is right-handed, +X pointing right, +Y - upwards, and +Z - backwards (towards the camera).
+
+Note that transform functions are not covered by unit tests because they're correct.
 
 #### Operations
 

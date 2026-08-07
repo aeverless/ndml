@@ -1,0 +1,169 @@
+AccessModifierOffset: -8
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Right
+AlignConsecutiveAssignments:
+  Enabled: Yes
+  AcrossEmptyLines: No
+  AcrossComments: No
+  AlignCompound: Yes
+  AlignFunctionPointers: No
+  PadOperators: No
+AlignConsecutiveBitFields: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveMacros: Consecutive
+AlignConsecutiveShortCaseStatements:
+  Enabled: Yes
+AlignEscapedNewlines: Left
+AlignOperands: AlignAfterOperator
+AlignTrailingComments:
+  Kind: Always
+AllowAllArgumentsOnNextLine: No
+AllowAllParametersOfDeclarationOnNextLine: No
+AllowBreakBeforeNoexceptSpecifier: OnlyWithParen
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: No
+AllowShortCompoundRequirementOnASingleLine: Yes
+AllowShortEnumsOnASingleLine: No
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: No
+AlwaysBreakBeforeMultilineStrings: Yes
+
+BinPackArguments: No
+BinPackParameters: OnePerLine
+BitFieldColonSpacing: Both
+BraceWrapping:
+  AfterCaseLabel: Yes
+  AfterClass: Yes
+  AfterControlStatement: Always
+  AfterEnum: Yes
+  AfterFunction: Yes
+  AfterNamespace: Yes
+  AfterStruct: Yes
+  AfterUnion: Yes
+  AfterExternBlock: Yes
+  BeforeCatch: Yes
+  BeforeElse: Yes
+  BeforeLambdaBody: Yes
+  BeforeWhile: Yes
+  IndentBraces: No
+  SplitEmptyFunction: No
+  SplitEmptyRecord: No
+  SplitEmptyNamespace: No
+BreakAfterAttributes: Leave
+BreakBeforeBraces: Custom
+BreakBeforeConceptDeclarations: Always
+BreakConstructorInitializers: BeforeComma
+# BreakInheritanceList: BeforeComma
+BreakStringLiterals: Yes
+AlwaysBreakTemplateDeclarations: Yes
+
+CompactNamespaces: No
+ColumnLimit: 160
+ConstructorInitializerIndentWidth: 8
+ContinuationIndentWidth: 8
+Cpp11BracedListStyle: FunctionCall
+
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+
+FixNamespaceComments: No
+
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"'
+    Priority: 2
+  - Regex: "^<"
+    Priority: 3
+IndentAccessModifiers: No
+IndentCaseBlocks: Yes
+IndentCaseLabels: No
+IndentExternBlock: NoIndent
+IndentGotoLabels: No
+IndentPPDirectives: AfterHash
+IndentRequiresClause: Yes
+IndentWidth: 8
+IndentWrappedFunctionNames: No
+InsertBraces: Yes
+InsertNewlineAtEOF: Yes
+InsertTrailingCommas: Wrapped
+IntegerLiteralSeparator:
+  Binary: 4
+  BinaryMinDigits: 8
+  Decimal: 3
+  DecimalMinDigits: 5
+  Hex: 2
+  HexMinDigits: 6
+
+KeepEmptyLinesAtEOF: No
+KeepEmptyLinesAtTheStartOfBlocks: No
+
+LambdaBodyIndentation: Signature
+Language: Cpp
+LineEnding: LF
+
+MaxEmptyLinesToKeep: 2
+
+NamespaceIndentation: None
+
+PPIndentWidth: 8
+PointerAlignment: Left
+
+QualifierAlignment: Custom
+QualifierOrder:
+  [
+    "friend",
+    "static",
+    "inline",
+    "constexpr",
+    "type",
+    "const",
+    "volatile",
+    "restrict",
+  ]
+
+ReferenceAlignment: Pointer
+ReflowComments: IndentOnly
+RemoveBracesLLVM: No
+RemoveParentheses: Leave
+RemoveSemicolon: Yes
+RequiresClausePosition: OwnLine
+RequiresExpressionIndentation: OuterScope
+
+SeparateDefinitionBlocks: Leave
+SortIncludes: Never
+SortUsingDeclarations: LexicographicNumeric
+SpaceAfterCStyleCast: Yes
+SpaceAfterLogicalNot: No
+SpaceBeforeAssignmentOperators: Yes
+SpaceBeforeCaseColon: No
+SpaceBeforeCpp11BracedList: No
+SpaceBeforeCtorInitializerColon: Yes
+SpaceBeforeInheritanceColon: Yes
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: Yes
+  AfterFunctionDeclarationName: No
+  AfterFunctionDefinitionName: No
+  AfterOverloadedOperator: No
+  AfterPlacementOperator: Yes
+  AfterRequiresInClause: Yes
+  AfterRequiresInExpression: Yes
+  BeforeNonEmptyParentheses: No
+SpaceBeforeRangeBasedForLoopColon: Yes
+SpaceBeforeSquareBrackets: No
+SpaceInEmptyBlock: No
+SpaceAfterTemplateKeyword: Yes
+SpacesInAngles: Never
+SpacesInContainerLiterals: No
+SpacesInLineCommentPrefix:
+  Minimum: 1
+  Maximum: -1
+SpacesInParens: Never
+SpacesInSquareBrackets: No
+Standard: Auto
+
+TabWidth: 8
+
+UseTab: AlignWithSpaces

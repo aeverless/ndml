@@ -6,6 +6,41 @@
 namespace ndml
 {
 /**
+ * @brief Calls the function for every component, potentially modifying the vector.
+ *
+ * This calls @p f with each component of @p v.
+ *
+ * @tparam N     dimension
+ * @tparam T     element type
+ * @tparam Unary type of functor
+ *
+ * @param lhs vector to be potentially modified
+ * @param f   functor
+ *
+ * @return reference to @p lhs
+ */
+template <std::size_t N, typename T, typename UnaryFn>
+constexpr auto for_each(vec<N, T>& v, UnaryFn const& f) noexcept(noexcept(std::ranges::for_each(v, f))) -> vec<N, T>&;
+
+/**
+ * @brief Calls the function for pairs of components, potentially modifying @p lhs.
+ *
+ * This calls @p f with each component of @p lhs and @p rhs.
+ *
+ * @tparam N        dimension
+ * @tparam T        element type
+ * @tparam BinaryFn type of functor
+ *
+ * @param lhs vector to be potentially modified
+ * @param rhs vector to call @p f with
+ * @param f   functor
+ *
+ * @return reference to @p lhs
+ */
+template <std::size_t N, typename T, typename BinaryFn>
+constexpr auto zip_for_each(vec<N, T>& lhs, vec<N, T> const& rhs, BinaryFn const& f) noexcept(noexcept(f(lhs[0], rhs[0]))) -> vec<N, T>&;
+
+/**
  * @brief Transforms the components of a vector.
  *
  * This applies @p f to each component of @p v.
@@ -17,10 +52,10 @@ namespace ndml
  * @param v vector to be transformed
  * @param f transform functor
  *
- * @return reference to @p v
+ * @return transformed copy of @p v
  */
 template <std::size_t N, typename T, typename UnaryFn>
-constexpr auto transform(vec<N, T>& v, UnaryFn const& f) noexcept(noexcept(std::ranges::for_each(v, f))) -> vec<N, T>&;
+constexpr auto transform(vec<N, T> const& v, UnaryFn const& f) noexcept(noexcept(f(v[0]))) -> vec<N, T>;
 
 /**
  * @brief Zip-transforms the components of a vector with the components of another vector.
@@ -35,10 +70,10 @@ constexpr auto transform(vec<N, T>& v, UnaryFn const& f) noexcept(noexcept(std::
  * @param rhs vector to transform @p lhs against
  * @param f   transform functor
  *
- * @return reference to @p v
+ * @return transformed copy of @p v
  */
 template <std::size_t N, typename T, typename BinaryFn>
-constexpr auto zip_transform(vec<N, T>& lhs, vec<N, T> const& rhs, BinaryFn const& f) noexcept(noexcept(f(lhs[0], rhs[0]))) -> vec<N, T>&;
+constexpr auto zip_transform(vec<N, T> const& lhs, vec<N, T> const& rhs, BinaryFn const& f) noexcept(noexcept(f(lhs[0], rhs[0]))) -> vec<N, T>;
 
 /**
  * @brief Dot product of two vectors.

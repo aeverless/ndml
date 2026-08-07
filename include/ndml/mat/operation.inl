@@ -1,13 +1,13 @@
 namespace ndml
 {
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto transpose(mat<R, C, T> const& m) noexcept -> mat<C, R, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto transpose(mat<C, R, T> const& m) noexcept -> mat<R, C, T>
 {
-	mat<C, R, T> t;
+	mat<R, C, T> t;
 
-	for (std::size_t i = 0; i < m.column_count; ++i)
+	for (auto i = 0uz; i < m.column_count; ++i)
 	{
-		for (std::size_t j = 0; j < m.row_count; ++j)
+		for (auto j = 0uz; j < m.row_count; ++j)
 		{
 			t[j, i] = m[i, j];
 		}
@@ -21,7 +21,7 @@ constexpr auto row_echelon_form(mat<N, N, T> const& m) noexcept -> mat<N, N, T>
 {
 	mat ref{m};
 
-	for (std::size_t i = 0; i < ref.column_count; ++i)
+	for (auto i = 0uz; i < ref.column_count; ++i)
 	{
 		for (std::size_t j = i + 1; j < ref.row_count; ++j)
 		{
@@ -79,7 +79,7 @@ constexpr auto determinant(mat<N, N, T> const& m) noexcept -> mat<N, N, T>::valu
 	T det{1};
 
 	auto const ref = row_echelon_form(m);
-	for (std::size_t i = 0; i < N; ++i)
+	for (auto i = 0uz; i < N; ++i)
 	{
 		det *= ref[i, i];
 	}
@@ -104,7 +104,7 @@ constexpr auto inverse(mat<2, 2, T> const& m) noexcept -> mat<2, 2, T>
 	auto const& m10 = m1[0];
 	auto const& m11 = m1[1];
 
-	auto const det = m00 * m11 - m01 * m11;
+	auto const det = m00 * m11 - m01 * m10;
 
 	return mat{
 		       vec{ m11, -m01},
@@ -119,17 +119,17 @@ constexpr auto inverse(mat<N, N, T> const& m) noexcept -> mat<N, N, T>
 	mat<N, N, T> inv{1};
 	mat          id{m};
 
-	for (std::size_t i = 0; i < id.column_count; ++i)
+	for (auto i = 0uz; i < id.column_count; ++i)
 	{
 		auto const pivot = id[i, i];
 
-		for (std::size_t j = 0; j < id.column_count; ++j)
+		for (auto j = 0uz; j < id.column_count; ++j)
 		{
 			id[j, i]  /= pivot;
 			inv[j, i] /= pivot;
 		}
 
-		for (std::size_t j = 0; j < id.row_count; ++j)
+		for (auto j = 0uz; j < id.row_count; ++j)
 		{
 			if (i == j)
 			{
@@ -138,7 +138,7 @@ constexpr auto inverse(mat<N, N, T> const& m) noexcept -> mat<N, N, T>
 
 			auto const scale = id[i, j];
 
-			for (std::size_t k = 0; k < id.column_count; ++k)
+			for (auto k = 0uz; k < id.column_count; ++k)
 			{
 				id[k, j]  -= scale * id[k, i];
 				inv[k, j] -= scale * inv[k, i];
@@ -154,7 +154,7 @@ constexpr auto trace(mat<N, N, T> const& m) noexcept -> mat<N, N, T>::value_type
 {
 	T tr{};
 
-	for (std::size_t i = 0; i < m.column_count; ++i)
+	for (auto i = 0uz; i < m.column_count; ++i)
 	{
 		tr += m[i, i];
 	}
@@ -162,10 +162,10 @@ constexpr auto trace(mat<N, N, T> const& m) noexcept -> mat<N, N, T>::value_type
 	return tr;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator+=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator+=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&
 {
-	for (std::size_t i = 0; i < C; ++i)
+	for (auto i = 0uz; i < C; ++i)
 	{
 		lhs[i] += rhs[i];
 	}
@@ -173,10 +173,10 @@ constexpr auto operator+=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -
 	return lhs;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator-=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator-=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&
 {
-	for (std::size_t i = 0; i < C; ++i)
+	for (auto i = 0uz; i < C; ++i)
 	{
 		lhs[i] -= rhs[i];
 	}
@@ -184,41 +184,41 @@ constexpr auto operator-=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -
 	return lhs;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&
 {
 	lhs = lhs * rhs;
 	return lhs;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*=(mat<R, C, T>& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>&
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*=(mat<C, R, T>& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>&
 {
 	std::ranges::for_each(m, [&scale](auto& column) { return column *= scale; });
 	return m;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator/=(mat<R, C, T>& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>&
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator/=(mat<C, R, T>& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>&
 {
 	std::ranges::for_each(m, [&scale](auto& column) { return column /= scale; });
 	return m;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator==(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> bool
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator==(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> bool
 {
 	return std::ranges::equal(lhs, rhs);
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator!=(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> bool
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator!=(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> bool
 {
 	return !(lhs == rhs);
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator+(mat<R, C, T> const& m) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator+(mat<C, R, T> const& m) noexcept -> mat<C, R, T>
 {
 	auto tmp{m};
 	for (auto& column : tmp)
@@ -229,8 +229,8 @@ constexpr auto operator+(mat<R, C, T> const& m) noexcept -> mat<R, C, T>
 	return tmp;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator-(mat<R, C, T> const& m) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator-(mat<C, R, T> const& m) noexcept -> mat<C, R, T>
 {
 	auto tmp{m};
 	for (auto& column : tmp)
@@ -241,32 +241,32 @@ constexpr auto operator-(mat<R, C, T> const& m) noexcept -> mat<R, C, T>
 	return tmp;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator+(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator+(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>
 {
 	auto tmp{lhs};
 	return tmp += rhs;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator-(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator-(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>
 {
 	auto tmp{lhs};
 	return tmp -= rhs;
 }
 
 template <std::size_t N, std::size_t M, std::size_t K, typename T>
-constexpr auto operator*(mat<N, M, T> const& lhs, mat<M, K, T> const& rhs) noexcept -> mat<N, K, T>
+constexpr auto operator*(mat<N, M, T> const& lhs, mat<K, N, T> const& rhs) noexcept -> mat<M, K, T>
 {
-	mat<N, K, T> p;
+	mat<M, K, T> p;
 
-	for (std::size_t i = 0; i < lhs.row_count; ++i)
+	for (auto i = 0uz; i < lhs.row_count; ++i)
 	{
-		for (std::size_t j = 0; j < rhs.column_count; ++j)
+		for (auto j = 0uz; j < rhs.column_count; ++j)
 		{
-			for (std::size_t k = 0; k < lhs.column_count; ++k)
+			for (auto k = 0uz; k < lhs.column_count; ++k)
 			{
-				p[j, i] += lhs[k, i] * rhs[j, k];
+				p[i, j] += lhs[k, i] * rhs[j, k];
 			}
 		}
 	}
@@ -274,37 +274,37 @@ constexpr auto operator*(mat<N, M, T> const& lhs, mat<M, K, T> const& rhs) noexc
 	return p;
 }
 
-template <std::size_t N, std::size_t M, typename T>
-constexpr auto operator*(mat<N, M, T> const& m, vec<M, T> const& v) noexcept -> vec<N, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*(mat<C, R, T> const& m, vec<R, T> const& v) noexcept -> vec<R, T>
 {
-	vec<N, T> p;
+	vec<R, T> p;
 
-	for (std::size_t i = 0; i < m.row_count; ++i)
+	for (std::size_t c = 0; c < m.column_count; ++c)
 	{
-		for (std::size_t k = 0; k < m.column_count; ++k)
+		for (std::size_t r = 0; r < m.row_count; ++r)
 		{
-			p[i] += m[k, i] * v[k];
+			p[c] += m[c, r] * v[r];
 		}
 	}
 
 	return p;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*(mat<R, C, T> const& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*(mat<C, R, T> const& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>
 {
 	auto tmp{m};
 	return tmp *= scale;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*(typename mat<R, C, T>::value_type const& scale, mat<R, C, T> const& m) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*(typename mat<C, R, T>::value_type const& scale, mat<C, R, T> const& m) noexcept -> mat<C, R, T>
 {
 	return m * scale;
 }
 
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator/(mat<R, C, T> const& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator/(mat<C, R, T> const& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>
 {
 	auto tmp{m};
 	return tmp /= scale;

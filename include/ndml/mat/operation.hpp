@@ -18,9 +18,9 @@ namespace ndml
  *
  * @return the transpose of @p m
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto transpose(mat<R, C, T> const& m) noexcept -> mat<C, R, T>;
+constexpr auto transpose(mat<C, R, T> const& m) noexcept -> mat<R, C, T>;
 
 /**
  * @brief The row echelon form of a matrix.
@@ -62,8 +62,8 @@ constexpr auto determinant(mat<N, N, T> const& m) noexcept -> mat<N, N, T>::valu
  *
  * This calculates the inverse of a matrix via a method called Gauss-Jordan elimination.
  *
- * @tparam R number of rows
  * @tparam C number of columns
+ * @tparam R number of rows
  * @tparam T element type
  *
  * @param m matrix
@@ -79,8 +79,8 @@ constexpr auto inverse(mat<N, N, T> const& m) noexcept -> mat<N, N, T>;
  *
  * This calculates the trace of a matrix by summing up its diagonal elements.
  *
- * @tparam R number of rows
  * @tparam C number of columns
+ * @tparam R number of rows
  * @tparam T element type
  *
  * @param m matrix
@@ -96,40 +96,40 @@ constexpr auto trace(mat<N, N, T> const& m) noexcept -> mat<N, N, T>::value_type
  *
  * Adds columns of @p rhs to respective columns of @p lhs.
  */
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator+=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&;
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator+=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&;
 
 /**
  * @brief Matrix subtraction assignment operator.
  *
  * Subtracts columns of @p rhs from respective columns of @p lhs.
  */
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator-=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&;
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator-=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&;
 
 /**
  * @brief Matrix multiplication assignment operator.
  *
  * Performs matrix multiplication for @p lhs and @p rhs and assigns the result to @p lhs.
  */
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*=(mat<R, C, T>& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>&;
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*=(mat<C, R, T>& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>&;
 
 /**
  * @brief Matrix-scalar multiplication assignment operator.
  *
  * Multiplies columns of @p lhs by @p scale.
  */
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator*=(mat<R, C, T>& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>&;
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator*=(mat<C, R, T>& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>&;
 
 /**
  * @brief Matrix-scalar division assignment operator.
  *
  * Divides columns of @p lhs by @p scale.
  */
-template <std::size_t R, std::size_t C, typename T>
-constexpr auto operator/=(mat<R, C, T>& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>&;
+template <std::size_t C, std::size_t R, typename T>
+constexpr auto operator/=(mat<C, R, T>& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>&;
 
 /**
  * @brief Matrix equality comparison operator.
@@ -138,9 +138,9 @@ constexpr auto operator/=(mat<R, C, T>& m, typename mat<R, C, T>::value_type con
  *
  * @return @c true if two columns are equal, @c false otherwise
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator==(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> bool;
+constexpr auto operator==(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> bool;
 
 /**
  * @brief Matrix inequality comparison operator.
@@ -149,45 +149,45 @@ constexpr auto operator==(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noex
  *
  * @return @c false if two columns are equal, @c true otherwise
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator!=(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> bool;
+constexpr auto operator!=(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> bool;
 
 /**
  * @brief Matrix promotion operator.
  *
  * Returns a copy of @p m with unary promotion applied to each of its columns.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator+(mat<R, C, T> const& m) noexcept -> mat<R, C, T>;
+constexpr auto operator+(mat<C, R, T> const& m) noexcept -> mat<C, R, T>;
 
 /**
  * @brief Matrix promotion operator.
  *
  * Returns a copy of @p m with unary negation applied to each of its columns.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator-(mat<R, C, T> const& m) noexcept -> mat<R, C, T>;
+constexpr auto operator-(mat<C, R, T> const& m) noexcept -> mat<C, R, T>;
 
 /**
  * @brief Matrix addition operator.
  *
  * Adds columns of @p rhs to respective columns of a copy of @p lhs and returns the result.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator+(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>;
+constexpr auto operator+(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>;
 
 /**
  * @brief Matrix subtraction operator.
  *
  * Subtracts columns of @p rhs from respective columns of a copy of @p lhs and returns the result.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator-(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexcept -> mat<R, C, T>;
+constexpr auto operator-(mat<C, R, T> const& lhs, mat<C, R, T> const& rhs) noexcept -> mat<C, R, T>;
 
 /**
  * @brief Matrix multiplication operator.
@@ -196,34 +196,34 @@ constexpr auto operator-(mat<R, C, T> const& lhs, mat<R, C, T> const& rhs) noexc
  */
 template <std::size_t N, std::size_t M, std::size_t K, typename T>
 [[nodiscard]]
-constexpr auto operator*(mat<N, M, T> const& lhs, mat<M, K, T> const& rhs) noexcept -> mat<N, K, T>;
+constexpr auto operator*(mat<N, M, T> const& lhs, mat<K, N, T> const& rhs) noexcept -> mat<M, K, T>;
 
 /**
  * @brief Matrix-vector multiplication operator.
  *
  * Multiplies @p m by @p v and returns the result.
  */
-template <std::size_t N, std::size_t M, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator*(mat<N, M, T> const& m, vec<M, T> const& v) noexcept -> vec<N, T>;
+constexpr auto operator*(mat<C, R, T> const& m, vec<R, T> const& v) noexcept -> vec<R, T>;
 
 /**
  * @brief Matrix-scalar multiplication operator.
  *
  * Multiplies @p m by @p scale and returns the result.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator*(mat<R, C, T> const& m, typename mat<R, C, T>::value_type const& scale) noexcept -> mat<R, C, T>;
+constexpr auto operator*(mat<C, R, T> const& m, typename mat<C, R, T>::value_type const& scale) noexcept -> mat<C, R, T>;
 
 /**
  * @brief Scalar-matrix multiplication operator.
  *
  * Multiplies @p m by @p scale and returns the result.
  */
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 [[nodiscard]]
-constexpr auto operator*(typename mat<R, C, T>::value_type const& scale, mat<R, C, T> const& m) noexcept -> mat<R, C, T>;
+constexpr auto operator*(typename mat<C, R, T>::value_type const& scale, mat<C, R, T> const& m) noexcept -> mat<C, R, T>;
 }
 
 #include "operation.inl"

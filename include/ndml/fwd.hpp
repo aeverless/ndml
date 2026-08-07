@@ -8,7 +8,7 @@ namespace ndml
 template <std::size_t N, typename T>
 struct vec;
 
-template <std::size_t R, std::size_t C, typename T>
+template <std::size_t C, std::size_t R, typename T>
 struct mat;
 
 template <typename T>
