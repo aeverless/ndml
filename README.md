@@ -30,7 +30,7 @@ Vectors are supported for up to four dimensions so that each component may be ac
 
 ### Matrices
 
-The library's implementation of a matrix is `ndml::mat<C, R, T>`, given `R` - number of rows, `C` - number of columns, and `T` - element type. Matrices are column-major, so given a matrix `m`, `m[c]` will return a reference to column of `m` at index `c`.
+The library's implementation of a matrix is `ndml::mat<C, R, T>`, given `C` - number of columns, `R` - number of rows, and `T` - element type. Matrices are column-major, so given a matrix `m`, `m[c]` will return a reference to column of `m` at index `c`.
 
 Multi-parameter subscript is also available, so `m[c, r]` will return a reference to the element at the intersection of column `c` and row `r`.
 
