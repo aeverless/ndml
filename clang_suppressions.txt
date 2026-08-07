@@ -1,0 +1,6 @@
+[c2y-extensions]
+src:*
+
+# Suppress this because prebuilding the `std` module is janky.
+[reserved-module-identifier]
+src:*

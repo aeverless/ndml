@@ -1,6 +1,6 @@
 # ndml
 
-**ndml** (_n-dimensional mathematics library_) is a general purpose header-only C++23 linear algebra library with a focus on simplicity and standard-compliance.
+**ndml** (_n-dimensional mathematics library_) is a general purpose modular C++26 linear algebra library with a focus on simplicity and standard-compliance.
 
 Main features include _vectors_, _matrices_, and _quaternions_, operations over them and transformations.
 
@@ -37,8 +37,6 @@ Multi-parameter subscript is also available, so `m[c, r]` will return a referenc
 Note that there is no boundary checks for indexing columns, and so it is undefined behavior to access an out of range column.
 
 The coordinate system used for all transformations is right-handed, +X pointing right, +Y - upwards, and +Z - backwards (towards the camera).
-
-Note that transform functions are not covered by unit tests because they're correct.
 
 #### Operations
 
@@ -98,8 +96,8 @@ For instance, `ndml::meta::addition_assignment<T, U>` will perform `lhs += rhs` 
 
 The following requirements must be met to use the library:
 
-- C++23 support;
-- CMake 3.26 or newer.
+- C++26 support;
+- CMake 4.3.2 or newer.
 
 ## Contributing
 

@@ -89,7 +89,7 @@ HeaderFileExtensions: ["hpp", "inl"]
 ImplementationFileExtensions: ["cpp"]
 ExtraArgs:
   [
-    "-std=c++23",
+    "-std=c++26",
     "-Wpedantic",
     "-Wall",
     "-Wextra",
